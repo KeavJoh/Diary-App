@@ -1,10 +1,14 @@
 <template>
   <div class="card">
     <div class="card-header text-center" role="button">
-      <strong>{{day.fullName}}</strong>
+      <strong>{{ day.fullName }}</strong>
     </div>
     <div class="card-body">
-      <CalendarEvent />
+      <CalendarEvent
+        v-for="event in day.events"
+        :key="event.title"
+        :event="event"
+      />
     </div>
   </div>
 </template>
@@ -25,20 +29,20 @@ export default {
     day: {
       type: Object,
       required: true,
-      default: function() {
+      default: function () {
         return {
           id: -1,
           fullName: "Fehler",
           events: [],
         };
       },
-      validator: function(value) {
+      validator: function (value) {
         if (Object.keys(value).includes("id")) {
           return true;
         }
       },
     },
-  }
+  },
 };
 </script>
 
