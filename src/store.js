@@ -13,12 +13,21 @@ const mutations = {
   editEvent(dayId, eventTitle) {
     // Alle edit-Attribute auf false setzen, damit immer nur ein Event bearbeitet werden kann
     state.calendarWeekData.map((dayObj) => {
-        dayObj.events.map((event) => (event.edit = false));
+      dayObj.events.map((event) => (event.edit = false));
     });
     // Das gewünschte edit Attribute auf true setzen
     const dayObj = state.calendarWeekData.find((day) => day.id === dayId);
     const eventObj = dayObj.events.find((event) => event.title === eventTitle);
     eventObj.edit = true;
+  },
+  updateEvent(dayId, oldEventTitle, newEventTitle) {
+    newEventTitle = newEventTitle !== "" ? newEventTitle : oldEventTitle;
+    const dayObj = state.calendarWeekData.find((day) => day.id === dayId);
+    const eventObj = dayObj.events.find(
+      (event) => event.title === oldEventTitle
+    );
+    eventObj.title = newEventTitle;
+    eventObj.edit = false;
   },
   deleteEvent(dayId, eventTitle) {
     const dayObj = state.calendarWeekData.find((day) => day.id === dayId);

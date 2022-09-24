@@ -19,8 +19,14 @@
         </div>
       </template>
       <template v-else>
-        <input type="text" class="form-control" :placeholder="event.title" />
-        <i class="fas fa-check"></i>
+        <input
+          type="text"
+          class="form-control"
+          :placeholder="event.title"
+          @input="setNewEventTitle($event)"
+        />
+        <hr />
+        <i class="fas fa-check" role="button" @click="updateEvent()"></i>
       </template>
     </div>
   </div>
@@ -34,6 +40,11 @@ export default {
   props: {
     event: Object,
     day: Object,
+  },
+  data() {
+    return {
+      newEventTitle: "",
+    };
   },
   computed: {
     priorityDisplayName() {
@@ -57,6 +68,16 @@ export default {
     },
     deleteEvent() {
       Store.mutations.deleteEvent(this.day.id, this.event.title);
+    },
+    updateEvent() {
+      Store.mutations.updateEvent(
+        this.day.id,
+        this.event.title,
+        this.newEventTitle
+      );
+    },
+    setNewEventTitle(event) {
+      this.newEventTitle = event.target.value;
     },
   },
 };
