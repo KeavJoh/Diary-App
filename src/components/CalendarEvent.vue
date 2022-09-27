@@ -22,6 +22,7 @@
         <input
           type="text"
           class="form-control"
+          ref="newEventTitleInput"
           :placeholder="event.title"
           @input="setNewEventTitle($event)"
         />
@@ -60,7 +61,7 @@ export default {
         case 0:
           return "Mittel";
         case -1:
-          return "hoch";
+          return "Hoch";
       }
       return "Fehlende Priorität";
     },
@@ -71,6 +72,9 @@ export default {
   methods: {
     editEvent() {
       Store.mutations.editEvent(this.day.id, this.event.title);
+      this.$nextTick(() => {
+        this.$refs.newEventTitleInput.focus();
+      });
     },
     deleteEvent() {
       Store.mutations.deleteEvent(this.day.id, this.event.title);
