@@ -82,7 +82,7 @@ export default {
     updateEvent() {
       Store.mutations.updateEvent(this.day.id, this.event.title, {
         title: this.newEventTitle,
-        priority: this.event.newEventPriority,
+        priority: this.newEventPriority,
       });
     },
     setNewEventTitle(event) {
