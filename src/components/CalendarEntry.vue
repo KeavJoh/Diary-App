@@ -72,7 +72,12 @@ export default {
     },
     submitEvent() {
       Store.mutations.storeEvent(this.event);
-    }
+      this.event = {
+        title: "",
+        color: "primary",
+        priority: 0,
+      };
+    },
   },
 };
 </script>
