@@ -12,6 +12,7 @@
           type="text"
           class="form-control"
           placeholder="Neuer Eintrag"
+          ref="eventTitleInput"
           v-model="event.title"
           @keyup.enter.exact="submitEvent()"
           @keyup.ctrl.enter.exact="resetEventTitle()"
@@ -64,6 +65,9 @@ export default {
     submitEventButtonStatus() {
       return this.event.title === "";
     }
+  },
+  mounted: function() {
+    this.$refs.eventTitleInput.focus();
   },
   methods: {
     eventColorClasses(eventColor) {
