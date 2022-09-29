@@ -3,7 +3,9 @@
     <div class="row">
       <div class="col-12">
         <!-- Anfang: Template für die Calendar-Week-Component -->
-        <CalendarWeek />
+        <keep-alive>
+          <component :is="activeView"/>
+        </keep-alive>
         <!-- Ende: Template für die Calendar-Week-Component -->
       </div>
     </div>
@@ -29,7 +31,9 @@
 </template>
 
 <script>
+import Store from './store';
 import CalendarWeek from "./components/CalenderWeek";
+import CalendarWeekAsList from "./components/CalendarWeekAsList.vue";
 import CalendarEntry from "./components/CalendarEntry";
 import CalendarSettings from "./components/CalendarSettings";
 
@@ -41,6 +45,7 @@ export default {
 
     // Kurzschreibweise
     CalendarWeek,
+    CalendarWeekAsList,
     CalendarEntry,
     CalendarSettings,
   },
@@ -53,6 +58,9 @@ export default {
     buttonSettingsClasses() {
       return this.displaySettings ? ["btn-success"] : ["btn-outline-success"];
     },
+    activeView() {
+      return Store.getters.activeView();
+    }
   },
   methods: {
     toogleDisplaySettings() {
