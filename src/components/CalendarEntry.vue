@@ -34,7 +34,7 @@
         <hr />
         <div class="d-grid gap-2">
           <button class="btn btn-primary" @click="submitEvent()" :disabled="submitEventButtonStatus">Eintragen</button>
-          <button class="btn btn-danger">Inhalt löschen</button>
+          <button class="btn btn-danger" @click="resetEventTitle()">Inhalt löschen</button>
         </div>
       </div>
     </div>
@@ -86,6 +86,9 @@ export default {
       };
       this.error = false;
     },
+    resetEventTitle() {
+      this.event.title = "";
+    }
   },
 };
 </script>
